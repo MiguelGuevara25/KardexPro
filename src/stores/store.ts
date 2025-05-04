@@ -1,15 +1,11 @@
-import { Product, SaleItem } from "@/types";
+import { SaleItem } from "@/types";
 import { create } from "zustand";
 import axios from "axios";
 
 interface StoreState {
-  allProducts: Product[];
-  setAllProducts: (products: Product[]) => void;
-
   allSaleItems: SaleItem[];
   setAllSaleItems: (saleItems: SaleItem[]) => void;
 
-  getAllProducts: () => Promise<void>;
   getAllSaleItems: () => Promise<void>;
   addAllSaleItems: (saleItem: SaleItem) => Promise<void>;
 
@@ -24,13 +20,6 @@ export const useStore = create<StoreState>((set) => ({
 
   toggleSidebarExpanded: () => {
     set((state) => ({ isSidebarExpanded: !state.isSidebarExpanded }));
-  },
-
-  allProducts: [],
-  setAllProducts: (products) => set({ allProducts: products }),
-  getAllProducts: async () => {
-    const { data } = await axios.get("http://localhost:8084/api/products");
-    set({ allProducts: data });
   },
 
   allSaleItems: [],
