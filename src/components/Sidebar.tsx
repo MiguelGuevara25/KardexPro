@@ -23,13 +23,13 @@ export default function Sidebar() {
   return (
     <aside
       className={`bg-primary h-screen ${
-        isSidebarExpanded ? "w-1/15" : "w-20"
+        isSidebarExpanded ? "w-1/14" : "w-20"
       } transition-all duration-300 ease-in-out text-white pt-5 flex items-center flex-col gap-10`}
     >
       {isSidebarExpanded ? (
-        <h1 className="text-3xl font-light">
+        <h1 className="text-2xl font-light">
           <Link href="/">
-            Task<span className="font-bold">Pro</span>
+            Kardex<span className="font-bold">Pro</span>
           </Link>
         </h1>
       ) : (

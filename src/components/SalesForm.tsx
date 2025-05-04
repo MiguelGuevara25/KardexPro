@@ -1,13 +1,13 @@
 "use client";
 import { productStore } from "@/stores/products";
-import { useStore } from "@/stores/store";
+import { saleItemStore } from "@/stores/saleItem";
 import { Product, SaleItem } from "@/types";
 import axios from "axios";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 export default function SalesForm() {
-  const { addAllSaleItems, getAllSaleItems } = useStore();
+  const { addAllSaleItems, getAllSaleItems } = saleItemStore();
   const { getAllProducts, allProducts } = productStore();
 
   useEffect(() => {

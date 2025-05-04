@@ -1,5 +1,6 @@
 "use client";
-import { useStore } from "@/stores/store";
+import { productStore } from "@/stores/products";
+import { saleItemStore } from "@/stores/saleItem";
 import {
   Table,
   TableBody,
@@ -12,7 +13,8 @@ import { useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 
 export default function SalesTable() {
-  const { getAllSaleItems, allSaleItems } = useStore();
+  const { getAllSaleItems, allSaleItems } = saleItemStore();
+  const { deleteProduct } = productStore();
 
   useEffect(() => {
     getAllSaleItems();
@@ -54,7 +56,10 @@ export default function SalesTable() {
               S/ {item?.totalPrice}
             </TableCell>
             <TableCell>
-              <MdDelete className="text-xl cursor-pointer text-red-500" />
+              <MdDelete
+                onClick={() => deleteProduct(item?.id)}
+                className="text-xl cursor-pointer text-red-500"
+              />
             </TableCell>
           </TableRow>
         ))}

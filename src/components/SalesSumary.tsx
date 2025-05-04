@@ -1,8 +1,8 @@
 "use client";
-import { useStore } from "@/stores/store";
+import { saleItemStore } from "@/stores/saleItem";
 
 export default function SalesSumary() {
-  const { allSaleItems } = useStore();
+  const { allSaleItems } = saleItemStore();
 
   const total = allSaleItems.reduce(
     (sum, item) => sum + (item.totalPrice || 0),
@@ -38,10 +38,7 @@ export default function SalesSumary() {
 
           <div className="flex justify-between font-bold border-t-2 border-gray-300 pt-2 mt-2">
             <p>Pago de cliente</p>
-            <input
-              type="text"
-              className="w-24 text-end focus:outline-0"
-            />
+            <input type="text" className="w-24 text-end focus:outline-0" />
           </div>
 
           <div className="flex justify-between font-bold border-t-2 border-gray-300 pt-2 mt-2">

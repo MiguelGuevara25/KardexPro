@@ -1,14 +1,6 @@
-import { SaleItem } from "@/types";
 import { create } from "zustand";
-import axios from "axios";
 
 interface StoreState {
-  allSaleItems: SaleItem[];
-  setAllSaleItems: (saleItems: SaleItem[]) => void;
-
-  getAllSaleItems: () => Promise<void>;
-  addAllSaleItems: (saleItem: SaleItem) => Promise<void>;
-
   isSidebarExpanded: boolean;
   setIsSidebarExpanded: (expanded: boolean) => void;
   toggleSidebarExpanded: () => void;
@@ -20,28 +12,5 @@ export const useStore = create<StoreState>((set) => ({
 
   toggleSidebarExpanded: () => {
     set((state) => ({ isSidebarExpanded: !state.isSidebarExpanded }));
-  },
-
-  allSaleItems: [],
-  setAllSaleItems: (saleItems) => set({ allSaleItems: saleItems }),
-  getAllSaleItems: async () => {
-    const { data } = await axios.get("http://localhost:8084/api/sale-item");
-    set({ allSaleItems: data });
-  },
-
-  addAllSaleItems: async (data: SaleItem) => {
-    try {
-      await axios.post("http://localhost:8084/api/sale-item", {
-        quantity: data.quantity,
-        totalPrice: data.totalPrice,
-        dateSale: data.dateSale,
-        product: {
-          id: data.product,
-        },
-      });
-    } catch (error) {
-      console.error("Error adding sale item:", error);
-      throw error;
-    }
   },
 }));
