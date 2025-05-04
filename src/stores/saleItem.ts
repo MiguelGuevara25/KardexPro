@@ -8,6 +8,7 @@ interface SaleItemState {
 
   getAllSaleItems: () => Promise<void>;
   addAllSaleItems: (saleItem: SaleItem) => Promise<void>;
+  deleteSaleItem: (id: number) => Promise<void>;
 }
 
 export const saleItemStore = create<SaleItemState>((set) => ({
@@ -30,6 +31,20 @@ export const saleItemStore = create<SaleItemState>((set) => ({
       });
     } catch (error) {
       console.error("Error adding sale item:", error);
+      throw error;
+    }
+  },
+
+  deleteSaleItem: async (id: number) => {
+    try {
+      await axios.delete(`http://localhost:8084/api/sale-item/${id}`);
+      set((state) => ({
+        allSaleItems: state.allSaleItems.filter(
+          (saleItem) => saleItem.id !== id
+        ),
+      }));
+    } catch (error) {
+      console.error("Error deleting sale item:", error);
       throw error;
     }
   },

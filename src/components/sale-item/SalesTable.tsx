@@ -1,5 +1,4 @@
 "use client";
-import { productStore } from "@/stores/products";
 import { saleItemStore } from "@/stores/saleItem";
 import {
   Table,
@@ -13,8 +12,7 @@ import { useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 
 export default function SalesTable() {
-  const { getAllSaleItems, allSaleItems } = saleItemStore();
-  const { deleteProduct } = productStore();
+  const { getAllSaleItems, allSaleItems, deleteSaleItem } = saleItemStore();
 
   useEffect(() => {
     getAllSaleItems();
@@ -57,7 +55,7 @@ export default function SalesTable() {
             </TableCell>
             <TableCell>
               <MdDelete
-                onClick={() => deleteProduct(item?.id)}
+                onClick={() => deleteSaleItem(item?.id)}
                 className="text-xl cursor-pointer text-red-500"
               />
             </TableCell>
